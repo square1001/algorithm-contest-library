@@ -53,7 +53,7 @@ double distance(point2d& p, segment2d& s) {
 }
 double distance(segment2d& s1, segment2d& s2) {
 	if (intersect(s1, s2)) return 0.0;
-	return min({ distance(s1.p1, s2), distance(s1.p2, s2), distance(s2.p1, s1), distance(s2.p2, s1) });
+	return std::min({ distance(s1.p1, s2), distance(s1.p2, s2), distance(s2.p1, s1), distance(s2.p2, s1) });
 }
 double area(vector<point2d> v) {
 	double sum = 0.0;
