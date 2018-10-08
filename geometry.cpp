@@ -1,6 +1,7 @@
 #include <cmath>
 #include <vector>
 #include <algorithm>
+
 class point2d {
 public:
 	double x, y;
@@ -55,20 +56,20 @@ double distance(segment2d& s1, segment2d& s2) {
 	if (intersect(s1, s2)) return 0.0;
 	return std::min({ distance(s1.p1, s2), distance(s1.p2, s2), distance(s2.p1, s1), distance(s2.p2, s1) });
 }
-double area(vector<point2d> v) {
+double area(std::vector<point2d> v) {
 	double sum = 0.0;
 	for (int i = 0; i < v.size(); ++i) {
 		sum += v[i].cross(v[(i + 1) % v.size()]);
 	}
 	return std::abs(sum) * 0.5;
 }
-int contain(vector<point2d> v, point2d p) {
+int contain(std::vector<point2d> v, point2d p) {
 	// (IN POLYGON, ON THE EDGE, OUT OF POLYGON) = (1, 0, -1)
 	int ans = -1;
 	for (int i = 0; i < v.size(); ++i) {
 		point2d p1 = v[i] - p;
 		point2d p2 = v[(i + 1) % v.size()] - p;
-		if (p1.x > p2.x) swap(p1, p2);
+		if (p1.x > p2.x) std::swap(p1, p2);
 		if (p1.x <= 0 && 0 < p2.x && p1.cross(p2) < 0) ans *= -1;
 		if (p1.cross(p2) == 0 && p1.dot(p2) <= 0) return 0;
 	}
