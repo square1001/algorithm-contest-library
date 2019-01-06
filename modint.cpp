@@ -31,4 +31,4 @@ public:
 	modint inv() { return (*this).binpow(mod - 2); }
 };
 
-#endif
+#endif // ___CLASS_MODINT
