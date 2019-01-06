@@ -1,3 +1,6 @@
+#ifndef ___CLASS_MODINT
+#define ___CLASS_MODINT
+
 #include <cstdint>
 
 template<std::uint32_t mod>
@@ -27,3 +30,5 @@ public:
 	}
 	modint inv() { return (*this).binpow(mod - 2); }
 };
+
+#endif
