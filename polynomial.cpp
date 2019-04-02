@@ -128,6 +128,7 @@ public:
 	}
 	polynomial& operator%=(const polynomial& p) {
 		(*this) -= (*this) / p * p;
+		(*this) = (*this).resize_transform(p.size() - 1);
 		return (*this);
 	}
 	polynomial operator+() const {
