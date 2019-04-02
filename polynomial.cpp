@@ -1,3 +1,6 @@
+#ifndef CLASS_POLYNOMIAL
+#define CLASS_POLYNOMIAL
+
 #include <vector>
 #include <complex>
 #include <cstdint>
@@ -15,7 +18,7 @@ private:
 		std::size_t n = v.size();
 		const type pi = acos(type(-1));
 		for (std::size_t i = 0, j = 1; j < n - 1; ++j) {
-			for (std::size_t k = n >> 1; k > (i ^= k); k >>= 1);
+			for (std::size_t k = n >> 1; k >(i ^= k); k >>= 1);
 			if (i > j) std::swap(v[i], v[j]);
 		}
 		for (std::size_t b = 1; b < n; b <<= 1) {
@@ -36,10 +39,21 @@ private:
 	}
 public:
 	explicit polynomial() : sz(1), a(std::vector<type>({ type() })) {};
-	explicit polynomial(int sz_) : sz(sz_), a(std::vector<type>(sz_, type())) {};
+	explicit polynomial(std::size_t sz_) : sz(sz_), a(std::vector<type>(sz_, type())) {};
 	explicit polynomial(std::vector<type> a_) : sz(a_.size()), a(a_) {};
-	std::size_t size() { return sz; }
-	std::size_t degree() { return sz - 1; }
+	polynomial& operator=(const polynomial& p) {
+		sz = p.sz;
+		a = p.a;
+		return (*this);
+	}
+	std::size_t size() const { return sz; }
+	std::size_t degree() const { return sz - 1; }
+	type operator[](std::size_t idx) const {
+		return a[idx];
+	}
+	type& operator[](std::size_t idx) {
+		return a[idx];
+	}
 	bool operator==(const polynomial& p) const {
 		for (std::size_t i = 0; i < sz && i < p.sz; ++i) {
 			if (!equivalent(i < sz ? a[i] : type(0), i < p.sz ? p.a[i] : type(0))) {
@@ -50,6 +64,32 @@ public:
 	}
 	bool operator!=(const polynomial& p) const {
 		return !(operator==(p));
+	}
+	polynomial resize_transform(std::size_t d) const {
+		// Resize polynomial to d: in other words, f(x) := f(x) mod x^d
+		polynomial ans(*this);
+		ans.sz = d;
+		ans.a.resize(d, type(0));
+		return ans;
+	}
+	polynomial star_transform() const {
+		// f*(x) = x^degree * f(1/x)
+		polynomial ans(*this);
+		reverse(ans.a.begin(), ans.a.end());
+		return ans;
+	}
+	polynomial inverse(std::size_t d) const {
+		// Find g(x) where g(x) * f(x) = 1 (mod x^d)
+		polynomial ans(std::vector<type>({ type(1) / a[0] }));
+		while (ans.size() < d) {
+			polynomial nxt;
+			nxt = -ans * resize_transform(ans.size() * 2);
+			nxt.a[0] += type(2);
+			nxt *= ans;
+			ans = nxt.resize_transform(ans.size() * 2);
+		}
+		ans = ans.resize_transform(d);
+		return ans;
 	}
 	polynomial& operator+=(const polynomial& p) {
 		sz = std::max(sz, p.sz);
@@ -65,7 +105,7 @@ public:
 	}
 	polynomial& operator*=(const polynomial& p) {
 		std::size_t n = 2;
-		while (n < sz * 2 && n < p.sz * 2) n <<= 1;
+		while (n < sz * 2 || n < p.sz * 2) n <<= 1;
 		std::vector<std::complex<type> > v(n), pv(n);
 		for (std::size_t i = 0; i < sz; ++i) v[i] = a[i];
 		for (std::size_t i = 0; i < p.sz; ++i) pv[i] = p.a[i];
@@ -76,6 +116,14 @@ public:
 		sz += p.sz - 1;
 		a.resize(sz, type(0));
 		for (std::size_t i = 0; i < sz; ++i) a[i] = v[i].real();
+		return (*this);
+	}
+	polynomial& operator/=(const polynomial& p) {
+		std::size_t dn = degree(), dm = p.degree();
+		if (dn < dm) return polynomial();
+		polynomial gstar = p.star_transform().inverse(dn - dm + 1);
+		polynomial qstar = (gstar * (*this).star_transform()).resize_transform(dn - dm + 1);
+		(*this) = qstar.star_transform();
 		return (*this);
 	}
 	polynomial operator+() const {
@@ -93,4 +141,9 @@ public:
 	polynomial operator*(const polynomial& p) const {
 		return polynomial(*this) *= p;
 	}
+	polynomial operator/(const polynomial& p) const {
+		return polynomial(*this) /= p;
+	}
 };
+
+#endif
