@@ -126,6 +126,10 @@ public:
 		(*this) = qstar.star_transform();
 		return (*this);
 	}
+	polynomial& operator%=(const polynomial& p) {
+		(*this) -= (*this) / p * p;
+		return (*this);
+	}
 	polynomial operator+() const {
 		return polynomial(*this);
 	}
@@ -143,6 +147,9 @@ public:
 	}
 	polynomial operator/(const polynomial& p) const {
 		return polynomial(*this) /= p;
+	}
+	polynomial operator%(const polynomial& p) const {
+		return polynomial(*this) %= p;
 	}
 };
 
