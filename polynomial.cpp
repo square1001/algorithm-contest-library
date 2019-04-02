@@ -55,7 +55,7 @@ public:
 		return a[idx];
 	}
 	bool operator==(const polynomial& p) const {
-		for (std::size_t i = 0; i < sz && i < p.sz; ++i) {
+		for (std::size_t i = 0; i < sz || i < p.sz; ++i) {
 			if (!equivalent(i < sz ? a[i] : type(0), i < p.sz ? p.a[i] : type(0))) {
 				return false;
 			}
