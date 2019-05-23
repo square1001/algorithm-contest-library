@@ -5,7 +5,7 @@
 
 using singlebit = uint32_t;
 using doublebit = uint64_t;
-static constexpr int digit_level = 32;
+static constexpr int digit_level = 8 * sizeof(singlebit);
 
 static constexpr singlebit find_inv(singlebit n, int d = 6, singlebit x = 1) {
 	return d == 0 ? x : find_inv(n, d - 1, x * (2 - x * n));
@@ -44,6 +44,7 @@ public:
 		return ans;
 	}
 };
+
 #endif // CLASS_FAST_MODINT
 
 #ifndef CLASS_POLYNOMIAL_NTT
