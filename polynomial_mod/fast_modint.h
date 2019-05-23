@@ -45,15 +45,6 @@ public:
 	}
 };
 
-template<typename modulo>
-std::vector<modulo> get_modvector(std::vector<int> v) {
-	std::vector<modulo> ans(v.size());
-	for (int i = 0; i < v.size(); ++i) {
-		ans[i] = modulo(v[i]);
-	}
-	return ans;
-}
-
 #endif // CLASS_FAST_MODINT
 
 /*
