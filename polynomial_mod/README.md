@@ -22,9 +22,11 @@ In this file, we will convolve two polynomials. More specifically, letting A = a
 
 The expected running time is as follows (tested in "custom test" in [atcoder.jp](atcoder.jp)):
 
-|      n      | 2<sup>16</sup> | 2<sup>17</sup> | 2<sup>18</sup> | 2<sup>19</sup> | 2<sup>20</sup> | 2<sup>21</sup> | 2<sup>22</sup> |
+|      n      | 2<sup>17</sup> | 2<sup>18</sup> | 2<sup>19</sup> | 2<sup>20</sup> | 2<sup>21</sup> | 2<sup>22</sup> | 2<sup>23</sup> |
 |:-----------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|
-| time (sec.) |     0.0637     |     0.1388     |     0.2848     |     0.6297     |     1.3615     |     3.0734     |     > 10.00    |
+| time (sec.) |     0.0638     |     0.1403     |     0.2863     |     0.6219     |     1.4022     |     3.2095     |    > 10.0000   |
+
+Multiplication will work if (degree of polynomial) < 2<sup>depth</sup>
 
 ## polynomial_mod.h
 We will process addition, subtraction, multiplication, division (+ getting remainder) of polynomial in modulo field.
