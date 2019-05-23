@@ -1,7 +1,7 @@
 #ifndef CLASS_POLYNOMIAL_NTT
 #define CLASS_POLYNOMIAL_NTT
 
-#include "modint.h"
+#include "fast_modint.h"
 #include <vector>
 #include <algorithm>
 
