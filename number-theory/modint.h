@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-template<std::uint32_t mod>
+template <std::uint32_t mod>
 class modint {
 private:
 	std::uint32_t n;
