@@ -79,3 +79,44 @@ public:
 };
 
 #endif // CLASS_FAST_MODINT
+
+/*
+	Assertion:
+	- Basically the modulo value should be a prime number
+		- Should be assured when using inv()
+
+	Defining modulo integer modulo 1,000,000,007:
+	- modint<100000007> m;
+	- fast_modint<1000000007> m;
+
+	Tips to use fixed modulo:
+	- using modulo = modint<1000000007>;
+
+	Constructors:
+	- modint() : Constructor of modint set to zero
+	- modint(int64_t n) : Constructor of modint set to (n % mod)
+
+	Very Basic Function:
+	- uint32_t get_mod() : Returns the modulo value
+	- uint32_t get() : Returns the value converted to integer type
+
+	Operators:
+	- bool operator==(const modint& m) : Returns true if equal, otherwise false
+	- bool operator!=(const modint& m) : Returns true if different, otherwise true
+	- modint& operator+=(const modint& m) : Add m to the modint value
+	- modint& operator-=(const modint& m) : Subtract m to the modint value
+	- modint& operator*=(const modint& m) : Multiply m to the modint value
+	- modint operator+(const modint& m) : Returns ((the modint value) + m)
+	- modint operator-(const modint& m) : Returns ((the modint value) - m)
+	- modint operator*(const modint& m) : Returns ((the modint value) * m)
+
+	Advanced Functions:
+	- modint pow(std::uint64_t b) : Returns b-th power of the modint value
+	- modint inv() : Returns modular inverse of the modint value
+
+	Verified:
+	- CPSCO 2019 Session 3 Problem F: Flexible Permutations
+		- https://atcoder.jp/contests/cpsco2019-s3/submissions/5276295
+	- Educational DP Contest Problem H: Grid 1
+		- https://atcoder.jp/contests/dp/submissions/3939858
+*/
