@@ -2,8 +2,10 @@
 #define CLASS_ROLLING_HASH
 
 #include <string>
+#include <vector>
 #include <cstddef>
 #include <cstdint>
+#include <algorithm>
 
 class rolling_hash {
 public:
@@ -48,6 +50,36 @@ public:
 		std::uint64_t ans = mod + hash[r] - modmul(hash[l], pw[r - l]);
 		return ans < mod ? ans : ans - mod;
 	}
+	int lcp(std::size_t pa, std::size_t pb) {
+		int l = 0, r = sz - std::max(pa, pb) + 1;
+		while(r - l > 1) {
+			int m = (l + r) >> 1;
+			if(gethash(pa, pa + m) == gethash(pb, pb + m)) l = m;
+			else r = m;
+		}
+		return l;
+	}
+	bool compare(std::size_t la, std::size_t ra, std::size_t lb, std::size_t rb) {
+		// Determine if str[la, ra) < str[lb, rb) or not
+		std::size_t lcps = lcp(la, lb);
+		return (ra - la > lcps && rb - lb > lcps ? str[la + lcps] < str[lb + lcps] : ra - la < rb - lb);
+	}
 };
+
+template <class OutputIterator>
+void suffix_array(std::string str, OutputIterator result) {
+	std::size_t n = str.size();
+	std::vector<std::size_t> perm(n);
+	for(std::size_t i = 0; i < n; ++i) {
+		perm[i] = i;
+	}
+	rolling_hash rhs(str);
+	std::sort(perm.begin(), perm.end(), [&](std::size_t i, std::size_t j) {
+		return rhs.compare(i, n, j, n);
+	});
+	for(std::size_t i = 0; i < n; ++i, ++result) {
+		*result = perm[i];
+	}
+}
 
 #endif // CLASS_ROLLING_HASH
