@@ -1,5 +1,7 @@
 # Disjoint Set Libary
 
+**Main Library File: disjoint-set.h**  
+
 [Disjoint Set](https://en.wikipedia.org/wiki/Disjoint-set_data_structure) is a data structure which efficiently merges two groups and check if two elements are in the same group or not. We can also view this data structure in a graph theory way.
 
 ## What is Disjoint Set?
