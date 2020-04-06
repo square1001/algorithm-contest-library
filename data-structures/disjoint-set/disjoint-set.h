@@ -39,38 +39,3 @@ public:
 };
 
 #endif // CLASS_DISJOINT_SET
-
-/*
-	What is Disjoint Set?
-	- The disjoint set of N elements is the set of sets which appears 0, 1, 2, ..., N - 1 as elements exactly once.
-	- First, it is initialized for { 0 }, { 1 }, { 2 }, ..., { N - 1 }, which means all N elements are in different set.
-	- We can process queries of "merging two sets" in time complexity O(log* N).
-	- We can process queries of "deterimining if given two elements are in the same set" in time complexity O(log* N).
-	- Here, O(log* N) is the iterated logarithm of N.
-
-	Author: square1001
-
-	Last Update: January 6th, 2020
-
-	Constructors:
-	- disjoint_set() : Initialize to the empty disjoint set
-	- disjoint_set(N) : Initialize to the non-linked disjoint set with "N" elements
-
-	Basic Functions:
-	- std::size_t size() : Get the size of disjoint set itself
-
-	Functions:
-	- std::size_t size(elem) : Get the size of set with "elem"
-	- std::size_t link(elemx, elemy) : Merge set with "elemx" and set with "elemy"
-	- std::size_t connected(elemx, elemy) : Check if two elements "elemx" and "elemy" are in the same set
-
-	Verified:
-	- PAKEN Programming Camp 2019 Day 3 "PAKEN CUP 2019" Problem E : "Big Christmas Presents"
-		- https://atcoder.jp/contests/pakencamp-2019-day3/submissions/9336106
-		- Verified for "size(elem)" and "link(elem)"
-		- Verified in January 6th, 2020
-	- AOJ DSL 1-A : Disjoint Set: Union Find Tree
-		- https://onlinejudge.u-aizu.ac.jp/recent_judges/DSL_1_A/judge/4093054/square1001/C++11
-		- Verified for "link(elemx, elemy)" and "connected(elemx, elemy)"
-		- Verified in January 6th, 2020
-*/

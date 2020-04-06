@@ -72,3 +72,15 @@ Here, for initialization, the computing time per N was like following:
 Also, for the computing time for other functions:  
 * For `connected(x, y)`, its computing time is as same as `link(x, y)`.
 * For `root(x)`, its computing time is as half as `link(x, y)`.
+
+## Verification
+
+This library is verified on many competitive programming problems, such as following:  
+* PAKEN Programming Camp 2019 Day 3 "PAKEN CUP 2019" Problem E : "Big Christmas Presents"
+	* https://atcoder.jp/contests/pakencamp-2019-day3/submissions/9336106
+	* Verified for "size(elem)" and "link(elemx, elemy)"
+	* Verified in January 6th, 2020
+* AOJ DSL 1-A : Disjoint Set: Union Find Tree
+	* https://onlinejudge.u-aizu.ac.jp/recent_judges/DSL_1_A/judge/4093054/square1001/C++11
+	* Verified for "link(elemx, elemy)" and "connected(elemx, elemy)"
+    * Verified in January 6th, 2020
