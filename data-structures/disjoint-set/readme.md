@@ -45,7 +45,9 @@ It is compatible for C++11 or newer.
 
 ## Computing Time
 In my compiler of G++ 7.4.0, with 2.6GHz CPU, it ran roughly in the following time:  
-![Benchmark Graph](./benchmark.PNG)
+
+![Benchmark Graph](./benchmark.PNG)  
+
 Here, for initialization, the computing time per N was like following:  
 * For N < 65536 (= 2<sup>16</sup>), the initialization time was around 0.25 nanoseconds per N.
 * For N > 65536 (= 2<sup>16</sup>), the initialization time was around 1.00 nanoseconds per N.
