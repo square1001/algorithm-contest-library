@@ -86,7 +86,9 @@ std::vector<int> convex_hull(const std::vector<point2d<type> >& v) {
 	int N = v.size();
 	std::vector<int> perm(N);
 	for (int i = 0; i < N; ++i) perm[i] = i;
-	std::sort(perm.begin(), perm.end(), [&](int i, int j) { return v[i].y != v[j].y ? v[i].y < v[j].y : v[i].x < v[j].x; });
+	std::sort(perm.begin(), perm.end(), [&](int i, int j) {
+		return v[i].y != v[j].y ? v[i].y < v[j].y : v[i].x < v[j].x;
+	});
 	std::vector<int> st; st.push_back(perm[0]);
 	for (int i = 1; i < 2 * N - 1; ++i) {
 		int pos = perm[i < N ? i : 2 * N - i - 2];

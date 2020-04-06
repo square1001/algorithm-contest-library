@@ -11,7 +11,7 @@ unsigned xorshift32() {
 	return x;
 }
 void test(int n, int q) {
-	segment_tree<unsigned> seg(monoid_min<unsigned>, n);
+	segment_tree<unsigned> seg(n, monoid_min<unsigned>());
 	for(int i = 0; i < n; ++i) {
 		seg.update(i, xorshift32());
 	}
