@@ -79,7 +79,7 @@ Also, for the computing time for other functions:
 
 This library is verified on many competitive programming problems, such as following:  
 * PAKEN Programming Camp 2019 Day 3 "PAKEN CUP 2019" Problem E : "Big Christmas Presents"
-	* https://atcoder.jp/contests/pakencamp-2019-day3/submissions/9336106
+	* https://atcoder.jp/contests/pakencamp-2019-day3/submissions/11629954
 	* Verified for "size(elem)" and "link(elemx, elemy)"
 	* Verified in January 6th, 2020
 * AOJ DSL 1-A : Disjoint Set: Union Find Tree
